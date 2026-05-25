@@ -15,7 +15,7 @@ export const GOOGLE_CONFIG = {
   // Find calendar IDs in Google Calendar > Settings > [Calendar name] > Calendar ID
   calendarIds: [
     "primary",                          // Mum's main Gmail
-    "partner@gmail.com",                // Dad's Gmail (must be shared with Mum's account)
+    "jcuolahan@gmail.com",                // Dad's Gmail (must be shared with Mum's account)
     // "abc123@group.calendar.google.com", // e.g. school sports calendar
   ],
   scopes: "https://www.googleapis.com/auth/calendar.readonly",
@@ -31,7 +31,7 @@ export const GOOGLE_CONFIG = {
 // 6. Under "API permissions" add: Calendars.Read (delegated)
 export const MSAL_CONFIG = {
   auth: {
-    clientId: "YOUR_AZURE_APP_CLIENT_ID",
+    clientId: "5461126e-7209-492d-a20c-4fb8f769e291",
     authority: "https://login.microsoftonline.com/common",
     redirectUri: window.location.origin,
   },
@@ -48,26 +48,25 @@ export const GRAPH_SCOPES = ["Calendars.Read", "User.Read"];
 export const FAMILY_MEMBERS = [
   { id: "mum",   name: "Mum",   color: "#3b82f6", bg: "#eff6ff", calSource: "google" },
   { id: "dad",   name: "Dad",   color: "#22c55e", bg: "#f0fdf4", calSource: "outlook" },
-  { id: "liam",  name: "Liam",  color: "#a855f7", bg: "#fdf4ff", calSource: "google" },
-  { id: "emma",  name: "Emma",  color: "#f43f5e", bg: "#fff1f2", calSource: "google" },
-  { id: "jack",  name: "Jack",  color: "#f59e0b", bg: "#fffbeb", calSource: "google" },
-  { id: "noah",  name: "Noah",  color: "#14b8a6", bg: "#f0fdfa", calSource: "google" },
-  { id: "ava",   name: "Ava",   color: "#ec4899", bg: "#fdf2f8", calSource: "google" },
+  { id: "poppy",  name: "Poppy",  color: "#a855f7", bg: "#fdf4ff", calSource: "google" },
+  { id: "tex",  name: "Tex",  color: "#f43f5e", bg: "#fff1f2", calSource: "google" },
+  { id: "betty",  name: "Betty",  color: "#f59e0b", bg: "#fffbeb", calSource: "google" },
+  { id: "coco",  name: "Coco",  color: "#14b8a6", bg: "#f0fdfa", calSource: "google" },
+  { id: "roy",   name: "Roy",   color: "#ec4899", bg: "#fdf2f8", calSource: "google" },
 ];
 
 // --- SPORTS KEYWORDS ---
 // Events containing any of these words (case-insensitive) appear in the Sports tab
 export const SPORTS_KEYWORDS = [
-  "soccer", "football", "rugby", "swim", "swimming", "basketball",
-  "netball", "tennis", "cricket", "hockey", "gymnastics", "dance",
-  "athletics", "training", "practice", "game", "match", "meet", "fixture",
+  "AFL", "swimming", "basketball","netball", "dance",
+  "gym", "training", "practice", "game", "match", "meet", "fixture",
 ];
 
 // --- CHORES (edit weekly defaults here) ---
 export const DEFAULT_CHORES = {
-  liam: ["Dishes", "Bins"],
-  emma: ["Vacuuming"],
-  jack: ["Lawn"],
-  noah: ["Pets", "Laundry"],
-  ava:  ["Tidying"],
+  poppy: ["Dishes", "Cooking"],
+  tex: ["Pets"],
+  betty: ["Bins"],
+  coco: ["Laundry"],
+  roy:  ["Table"],
 };
