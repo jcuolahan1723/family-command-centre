@@ -10,7 +10,7 @@
 // 4. Add your GitHub Pages URL to Authorised JavaScript origins
 //    e.g. https://YOUR_GITHUB_USERNAME.github.io
 export const GOOGLE_CONFIG = {
-  clientId: "315162916664-l1231s9u1gpgru8jveo1u8g5q3kto8ke.apps.googleusercontent.com",
+  clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
   // Which calendars to sync — add as many as you like
   // Find calendar IDs in Google Calendar > Settings > [Calendar name] > Calendar ID
   calendarIds: [
