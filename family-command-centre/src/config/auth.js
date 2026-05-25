@@ -1,7 +1,7 @@
 // ============================================================
 // src/config/auth.js
 // Fill in YOUR credentials from Google Cloud Console and Azure
-// ============================================================
+// ========================================================+====
 
 // --- GOOGLE CALENDAR ---
 // 1. Go to https://console.cloud.google.com/
