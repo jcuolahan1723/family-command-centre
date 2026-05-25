@@ -43,14 +43,14 @@ export function useGoogleCalendar() {
   const fetchEvents = useCallback(async () => {
     setLoading(true);
     const now = new Date();
-    const twoWeeksLater = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+    const twoWeeksLater = new Date(now.getTime() + 28 * 24 * 60 * 60 * 1000);
 
     try {
       const allEvents = [];
       for (const calId of GOOGLE_CONFIG.calendarIds) {
         const res = await window.gapi.client.calendar.events.list({
           calendarId: calId,
-          timeMin: now.toISOString(),
+          timeMin: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
           timeMax: twoWeeksLater.toISOString(),
           showDeleted: false,
           singleEvents: true,
