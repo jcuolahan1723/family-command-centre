@@ -100,8 +100,11 @@ export function useGoogleCalendar() {
   }, []);
 
   const signIn = useCallback(() => {
-    window.gapi.auth2.getAuthInstance().signIn().then(fetchEvents);
-  }, [fetchEvents]);
+  window.gapi.auth2.getAuthInstance().signIn({
+      prompt: "consent",
+      scope: GOOGLE_CONFIG.scopes,
+    }).then(fetchEvents);
+    }, [fetchEvents]);
 
   const signOut = useCallback(() => {
     window.gapi.auth2.getAuthInstance().signOut();
