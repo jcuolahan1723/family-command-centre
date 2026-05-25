@@ -76,7 +76,7 @@ export function useGoogleCalendar() {
           maxResults: 100,
         });
         console.log("Google calendar response:", res.result);
-        console.log("Items found:", res.result.items?.length);
+        console.log("Items found:", res.result.items ? res.result.items.length : 0);
         const items = res.result.items || [];
         items.forEach(ev => {
           allEvents.push({
