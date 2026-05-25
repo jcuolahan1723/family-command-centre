@@ -58,7 +58,7 @@ export const FAMILY_MEMBERS = [
 // --- SPORTS KEYWORDS ---
 // Events containing any of these words (case-insensitive) appear in the Sports tab
 export const SPORTS_KEYWORDS = [
-  "AFL", "swimming", "basketball","netball", "dance",
+  "AFL", "swimming", "basketball","netball", "dance", "crossfit", "upstate",
   "gym", "training", "practice", "game", "match", "meet", "fixture",
 ];
 
