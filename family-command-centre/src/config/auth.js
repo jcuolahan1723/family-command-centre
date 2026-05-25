@@ -1,0 +1,73 @@
+// ============================================================
+// src/config/auth.js
+// Fill in YOUR credentials from Google Cloud Console and Azure
+// ============================================================
+
+// --- GOOGLE CALENDAR ---
+// 1. Go to https://console.cloud.google.com/
+// 2. Create a project, enable "Google Calendar API"
+// 3. Create OAuth 2.0 credentials (Web application)
+// 4. Add your GitHub Pages URL to Authorised JavaScript origins
+//    e.g. https://YOUR_GITHUB_USERNAME.github.io
+export const GOOGLE_CONFIG = {
+  clientId: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+  // Which calendars to sync — add as many as you like
+  // Find calendar IDs in Google Calendar > Settings > [Calendar name] > Calendar ID
+  calendarIds: [
+    "primary",                          // Mum's main Gmail
+    "partner@gmail.com",                // Dad's Gmail (must be shared with Mum's account)
+    // "abc123@group.calendar.google.com", // e.g. school sports calendar
+  ],
+  scopes: "https://www.googleapis.com/auth/calendar.readonly",
+  discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+};
+
+// --- MICROSOFT OUTLOOK ---
+// 1. Go to https://portal.azure.com/ (you already have credentials)
+// 2. Azure Active Directory > App registrations > New registration
+// 3. Name: "Family Command Centre"
+// 4. Supported account types: "Personal Microsoft accounts only" (or Accounts in any org)
+// 5. Redirect URI: Single-page application (SPA) > https://YOUR_GITHUB_USERNAME.github.io
+// 6. Under "API permissions" add: Calendars.Read (delegated)
+export const MSAL_CONFIG = {
+  auth: {
+    clientId: "YOUR_AZURE_APP_CLIENT_ID",
+    authority: "https://login.microsoftonline.com/common",
+    redirectUri: window.location.origin,
+  },
+  cache: {
+    cacheLocation: "localStorage",
+    storeAuthStateInCookie: false,
+  },
+};
+
+export const GRAPH_SCOPES = ["Calendars.Read", "User.Read"];
+
+// --- FAMILY MEMBERS ---
+// Add/rename each family member and assign a colour
+export const FAMILY_MEMBERS = [
+  { id: "mum",   name: "Mum",   color: "#3b82f6", bg: "#eff6ff", calSource: "google" },
+  { id: "dad",   name: "Dad",   color: "#22c55e", bg: "#f0fdf4", calSource: "outlook" },
+  { id: "liam",  name: "Liam",  color: "#a855f7", bg: "#fdf4ff", calSource: "google" },
+  { id: "emma",  name: "Emma",  color: "#f43f5e", bg: "#fff1f2", calSource: "google" },
+  { id: "jack",  name: "Jack",  color: "#f59e0b", bg: "#fffbeb", calSource: "google" },
+  { id: "noah",  name: "Noah",  color: "#14b8a6", bg: "#f0fdfa", calSource: "google" },
+  { id: "ava",   name: "Ava",   color: "#ec4899", bg: "#fdf2f8", calSource: "google" },
+];
+
+// --- SPORTS KEYWORDS ---
+// Events containing any of these words (case-insensitive) appear in the Sports tab
+export const SPORTS_KEYWORDS = [
+  "soccer", "football", "rugby", "swim", "swimming", "basketball",
+  "netball", "tennis", "cricket", "hockey", "gymnastics", "dance",
+  "athletics", "training", "practice", "game", "match", "meet", "fixture",
+];
+
+// --- CHORES (edit weekly defaults here) ---
+export const DEFAULT_CHORES = {
+  liam: ["Dishes", "Bins"],
+  emma: ["Vacuuming"],
+  jack: ["Lawn"],
+  noah: ["Pets", "Laundry"],
+  ava:  ["Tidying"],
+};
