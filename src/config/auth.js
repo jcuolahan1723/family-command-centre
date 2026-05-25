@@ -14,8 +14,8 @@ export const GOOGLE_CONFIG = {
   // Which calendars to sync — add as many as you like
   // Find calendar IDs in Google Calendar > Settings > [Calendar name] > Calendar ID
   calendarIds: [
-    "primary",                          // Mum's main Gmail
-    "jcuolahan@gmail.com",                // Dad's Gmail (must be shared with Mum's account)
+    "jcuolahan@gmail.com",                          // Dad's main Gmail
+    "courtneycuolahan@gmail.com",                // Mums Gmail (must be shared with Mum's account)
     // "abc123@group.calendar.google.com", // e.g. school sports calendar
   ],
   scopes: "https://www.googleapis.com/auth/calendar.readonly",
