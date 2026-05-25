@@ -23,7 +23,25 @@ export function useGoogleCalendar() {
   const initClient = useCallback(() => {
     window.gapi.load("client:auth2", async () => {
       try {
+       const initClient = useCallback(() => {
+        window.gapi.load("client:auth2", async () => {
+        try {
         await window.gapi.client.init({
+        clientId: GOOGLE_CONFIG.clientId,
+        discoveryDocs: GOOGLE_CONFIG.discoveryDocs,
+        scope: GOOGLE_CONFIG.scopes,
+      });
+      const authInstance = window.gapi.auth2.getAuthInstance();
+      setSignedIn(authInstance.isSignedIn.get());
+      authInstance.isSignedIn.listen(setSignedIn);
+      if (authInstance.isSignedIn.get()) await fetchEvents();
+      setLoading(false);
+    } catch (e) {
+      setError(e.details || e.message || "Google auth error");
+      setLoading(false);
+    }
+  });
+}, []); // eslint-disable-line await window.gapi.client.init({
           clientId: GOOGLE_CONFIG.clientId,
           discoveryDocs: GOOGLE_CONFIG.discoveryDocs,
           scope: GOOGLE_CONFIG.scopes,
