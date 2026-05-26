@@ -92,4 +92,4 @@ export function useGoogleCalendar() {
   }
 
   return { events: events, isSignedIn: isSignedIn, loading: loading, error: error, signIn: signIn, signOut: signOut, refetch: fetchEvents };
-} 
+}
