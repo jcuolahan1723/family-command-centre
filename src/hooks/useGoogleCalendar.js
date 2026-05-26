@@ -2,16 +2,35 @@
 import { useState, useEffect } from "react";
 import { GOOGLE_CONFIG } from "../config/auth";
 
+const TOKEN_KEY = "fcc_google_token";
+
 export function useGoogleCalendar() {
   const [events, setEvents] = useState([]);
   const [isSignedIn, setSignedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [tokenClient, setTokenClient] = useState(null);
+  const [gapiReady, setGapiReady] = useState(false);
 
   useEffect(function() {
     loadScripts();
   }, []);
+
+  useEffect(function() {
+    if (gapiReady) {
+      var saved = localStorage.getItem(TOKEN_KEY);
+      if (saved) {
+        try {
+          var token = JSON.parse(saved);
+          window.gapi.client.setToken(token);
+          setSignedIn(true);
+          fetchEvents();
+        } catch(e) {
+          localStorage.removeItem(TOKEN_KEY);
+        }
+      }
+    }
+  }, [gapiReady]);
 
   function loadScripts() {
     var gisLoaded = false;
@@ -33,6 +52,7 @@ export function useGoogleCalendar() {
           discoveryDocs: GOOGLE_CONFIG.discoveryDocs,
         }).then(function() {
           gapiLoaded = true;
+          setGapiReady(true);
           if (gisLoaded) initTokenClient();
         });
       });
@@ -49,6 +69,7 @@ export function useGoogleCalendar() {
           setError(response.error);
           return;
         }
+        localStorage.setItem(TOKEN_KEY, JSON.stringify(window.gapi.client.getToken()));
         setSignedIn(true);
         fetchEvents();
       },
@@ -70,6 +91,7 @@ export function useGoogleCalendar() {
       window.google.accounts.oauth2.revoke(token.access_token);
       window.gapi.client.setToken(null);
     }
+    localStorage.removeItem(TOKEN_KEY);
     setSignedIn(false);
     setEvents([]);
   }
