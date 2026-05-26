@@ -14,6 +14,9 @@ export const GOOGLE_CONFIG = {
   calendarIds: [
     "jcuolahan@gmail.com",
   ],
+  export const FAMILY_MEMBERS = [
+  { id: "dad", name: "Dad", color: "#3b82f6", bg: "#eff6ff", calSource: "google", calId: "jcuolahan@gmail.com" },
+  ...
   scopes: "https://www.googleapis.com/auth/calendar.readonly",
   discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
 };
