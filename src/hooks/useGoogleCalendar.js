@@ -7,42 +7,69 @@ export function useGoogleCalendar() {
   const [isSignedIn, setSignedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [tokenClient, setTokenClient] = useState(null);
 
-  function loadGapi() {
-    if (window.gapi) { setup(); return; }
-    var s = document.createElement("script");
-    s.src = "https://apis.google.com/js/api.js";
-    s.onload = setup;
-    document.body.appendChild(s);
-  }
+  useEffect(function() {
+    loadScripts();
+  }, []);
 
-  function setup() {
-    window.gapi.load("client:auth2", function() {
-      window.gapi.client.init({
-        clientId: GOOGLE_CONFIG.clientId,
-        discoveryDocs: GOOGLE_CONFIG.discoveryDocs,
-        scope: GOOGLE_CONFIG.scopes,
-      }).then(function() {
-        var auth = window.gapi.auth2.getAuthInstance();
-        setSignedIn(auth.isSignedIn.get());
-        auth.isSignedIn.listen(setSignedIn);
+  function loadScripts() {
+    var gisLoaded = false;
+    var gapiLoaded = false;
+
+    var gisScript = document.createElement("script");
+    gisScript.src = "https://accounts.google.com/gsi/client";
+    gisScript.onload = function() {
+      gisLoaded = true;
+      if (gapiLoaded) initTokenClient();
+    };
+    document.body.appendChild(gisScript);
+
+    var gapiScript = document.createElement("script");
+    gapiScript.src = "https://apis.google.com/js/api.js";
+    gapiScript.onload = function() {
+      window.gapi.load("client", function() {
+        window.gapi.client.init({
+          discoveryDocs: GOOGLE_CONFIG.discoveryDocs,
+        }).then(function() {
+          gapiLoaded = true;
+          if (gisLoaded) initTokenClient();
+        });
       });
-    });
+    };
+    document.body.appendChild(gapiScript);
   }
 
-  useEffect(function() { loadGapi(); }, []);
+  function initTokenClient() {
+    var client = window.google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CONFIG.clientId,
+      scope: GOOGLE_CONFIG.scopes,
+      callback: function(response) {
+        if (response.error) {
+          setError(response.error);
+          return;
+        }
+        setSignedIn(true);
+        fetchEvents();
+      },
+    });
+    setTokenClient(client);
+  }
 
   function signIn() {
-    window.gapi.auth2.getAuthInstance().signIn({
-      prompt: "consent"
-    }).then(function() {
-      setSignedIn(true);
-      fetchEvents();
-    });
+    if (tokenClient) {
+      tokenClient.requestAccessToken({ prompt: "consent" });
+    } else {
+      setError("Google not loaded yet, please try again");
+    }
   }
 
   function signOut() {
-    window.gapi.auth2.getAuthInstance().signOut();
+    var token = window.gapi.client.getToken();
+    if (token) {
+      window.google.accounts.oauth2.revoke(token.access_token);
+      window.gapi.client.setToken(null);
+    }
     setSignedIn(false);
     setEvents([]);
   }
@@ -91,5 +118,13 @@ export function useGoogleCalendar() {
     });
   }
 
-  return { events: events, isSignedIn: isSignedIn, loading: loading, error: error, signIn: signIn, signOut: signOut, refetch: fetchEvents };
+  return {
+    events: events,
+    isSignedIn: isSignedIn,
+    loading: loading,
+    error: error,
+    signIn: signIn,
+    signOut: signOut,
+    refetch: fetchEvents
+  };
 }
