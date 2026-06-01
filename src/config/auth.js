@@ -13,6 +13,7 @@ export const GOOGLE_CONFIG = {
   clientId: "315162916664-l1231s9u1gpgru8jveo1u8g5q3kto8ke.apps.googleusercontent.com",
   calendarIds: [
     "jcuolahan@gmail.com",
+    "courtneycuolahan@gmail.com"
   ],
   scopes: "https://www.googleapis.com/auth/calendar.readonly",
   discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
