@@ -47,13 +47,10 @@ export function mergeAndAssignEvents(googleEvents, outlookEvents) {
 }
 
 function guessMemberFromCalId(calId) {
-  if (!calId) return null;
-  // "primary" maps to first Google user (Mum). Others by email match.
-  if (calId === "primary") return FAMILY_MEMBERS[0];
-  return FAMILY_MEMBERS.find(m =>
-    calId.toLowerCase().includes(m.name.toLowerCase()) ||
-    calId.toLowerCase().includes(m.id.toLowerCase())
-  ) || null;
+  if (!calId) return FAMILY_MEMBERS[0];
+  return FAMILY_MEMBERS.find(function(m) {
+    return m.calId === calId;
+  }) || FAMILY_MEMBERS[0];
 }
 
 // ---- Events for a specific day ----
