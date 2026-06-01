@@ -43,11 +43,11 @@ export const GRAPH_SCOPES = ["Calendars.Read", "User.Read"];
 // --- FAMILY MEMBERS ---
 // Add/rename each family member and assign a colour
 export const FAMILY_MEMBERS = [
-  { id: "mum",   name: "Mum",   color: "#3b82f6", bg: "#eff6ff", calSource: "google" },
-  { id: "dad",   name: "Dad",   color: "#22c55e", bg: "#f0fdf4", calSource: "outlook" },
-  { id: "poppy",  name: "Poppy",  color: "#a855f7", bg: "#fdf4ff", calSource: "google" },
-  { id: "tex",  name: "Tex",  color: "#f43f5e", bg: "#fff1f2", calSource: "google" },
-  { id: "betty",  name: "Betty",  color: "#f59e0b", bg: "#fffbeb", calSource: "google" },
+  { id: "dad",   name: "Dad",   color: "#22c55e", bg: "#f0fdf4", calSource: "google",  calId: "jcuolahan@gmail.com" },
+  { id: "mum",   name: "Mum",   color: "#3b82f6", bg: "#eff6ff", calSource: "google",  calId: "courtneycuolahan@gmail.com" },
+  { id: "poppy", name: "Poppy", color: "#f43f5e", bg: "#fff1f2", calSource: "google" },
+  { id: "tex",   name: "Tex",   color: "#f59e0b", bg: "#fffbeb", calSource: "google" },
+  { id: "betty", name: "Betty", color: "#a855f7", bg: "#fdf4ff", calSource: "google" },
   { id: "coco",  name: "Coco",  color: "#14b8a6", bg: "#f0fdfa", calSource: "google" },
   { id: "roy",   name: "Roy",   color: "#ec4899", bg: "#fdf2f8", calSource: "google" },
 ];
@@ -61,9 +61,9 @@ export const SPORTS_KEYWORDS = [
 
 // --- CHORES (edit weekly defaults here) ---
 export const DEFAULT_CHORES = {
-  poppy: ["Dishes", "Cooking"],
-  tex: ["Pets"],
-  betty: ["Bins"],
-  coco: ["Laundry"],
-  roy:  ["Table"],
+  poppy: ["Dishes", "Cooking", "Laundry"],
+  tex:   ["Pets"],
+  betty: ["Bins", "Laundry"],
+  coco:  ["Dishes"],
+  roy:   ["Table"],
 };
